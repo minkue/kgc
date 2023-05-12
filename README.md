@@ -20,11 +20,11 @@
 * DataBase : H2 DB
 
 ### 3. 프로젝트 개발 범위
-### 3.1 화면 개발 ( Front-End, Back-End 공통 개발 )
+#### 3.1 화면 개발 ( Front-End, Back-End 공통 개발 )
 * 통합 회원 관리 화면 개발
   ![image](https://github.com/minkue/kgc/assets/74900977/6c89665d-fb28-4d06-8e84-b9330be2bdf1)
 
-### 3.2 Spring Framework 개발
+#### 3.2 Spring Framework 개발
 * 통합 회원 관리 도구 Framework 개발
   ![image](https://github.com/minkue/kgc/assets/74900977/9956067a-e368-4452-b51b-901bca5c81f5)
 
