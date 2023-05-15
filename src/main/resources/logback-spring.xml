@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 60초마다 설정 파일의 변경을 확인 하여 변경시 갱신 -->
+<configuration scan="true" scanPeriod="60 seconds">
+    <!-- profile 별 설정 가져오기  -->
+    <springProfile name="local"><property resource="logs/logback-local.properties"/></springProfile>
+    <springProfile name="dev"><property resource="logs/logback-dev.properties"/></springProfile>
+    <springProfile name="prod"><property resource="logs/logback-prod.properties"/></springProfile>
+    <!-- log file path -->
+    <!--<property name="LOG_PATH" value="${log.config.path}"/>-->
+    <property name="LOG_PATH" value="log"/>
+    <!-- log file name -->
+    <property name="LOG_FILE_NAME" value="${log.config.default.filename}"/>
+    <!-- pattern -->
+    <property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %logger{36} - %msg%n"/>
+    <!-- <property name="LOG_PATTERN_DEFAULT_ERROR" value="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %logger{36} - %msg%n"/> -->
+    <!-- 로그 레벨 -->
+    <!--
+    	1) ERROR : 오류 메시지 표시
+        2) WARN  : 경고성 메시지 표시
+        3) INFO  : 정보성 메시지 표시
+        4) DEBUG : 디버깅하기 위한 메시지 표시
+        5) TRACE : Debug보다 훨씬 상세한 메시지 표시
+        아래에서는 info로 설정하였는데, 이 경우엔 INFO보다 위에 있는 DEBUG와 TRACE는 표시하지 않는다.
+    -->
+    <property name="LOG_LEVEL" value="info"/>
+
+    <!-- CONSOLE에 로그 출력 세팅 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>${LOG_PATTERN}</Pattern>
+        </encoder>
+    </appender>
+
+    <!-- File에 로그 출력 세팅 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 파일 경로 설정 -->
+        <file>${LOG_PATH}/${LOG_FILE_NAME}.log</file>
+        <!-- 출력패턴 설정-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 로그 전역 세팅 -->
+    <root level="${LOG_LEVEL}">
+        <!-- 위에 설정한 콘솔 설정 추가 -->
+        <appender-ref ref="CONSOLE"/>
+        <!-- 위에 설정한 파일 설정 추가 -->
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
